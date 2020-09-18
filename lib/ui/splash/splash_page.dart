@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:playing/ui/main_page/main_page.dart';
+import 'package:playing/common/routes/app_routes.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -29,7 +28,9 @@ class SplashPageState extends State<SplashPage> {
         if (_count <= 1) {
           timer.cancel();
           timer = null;
-          Navigator.of(context).push(CupertinoPageRoute(builder: (context) => MainPage()));
+          Navigator.of(context).pushNamed(
+            AppRouter.mainPage,
+          );
         } else {
           _count = _count - 1;
         }

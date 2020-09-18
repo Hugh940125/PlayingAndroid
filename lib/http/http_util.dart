@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:playing/configs.dart';
+import 'package:playing/common/configs.dart';
 import 'package:playing/http/sign_tool.dart';
 
 typedef SuccessCallback<T> = void Function(T data);
 typedef ErrorCallback = void Function(String msg);
 typedef RefreshTokenCallback = void Function();
+typedef RequestStartCallback = void Function();
+typedef RequestFinishCallback = void Function();
 
 class HttpUtil<T> {
   Dio _dio;
@@ -41,8 +43,8 @@ class HttpUtil<T> {
   }
 
   //get请求
-  void get(String url,SuccessCallback onSuccess,RefreshTokenCallback onRefreshToken,ErrorCallback onError,{Map<String,dynamic> params}) async {
-    _request(url, 'GET',onSuccess,onRefreshToken,onError);
+  void get(String url,{SuccessCallback onSuccess,RefreshTokenCallback onRefreshToken,ErrorCallback onError,Map<String,dynamic> params, RequestStartCallback onStart, RequestFinishCallback onFinish}) async {
+    _request(url, 'GET',onSuccess,onRefreshToken,onError,onStart: onStart,onFinish: onFinish);
   }
 
   //加入签名的Post请求
@@ -56,8 +58,9 @@ class HttpUtil<T> {
   }
 
   void _request(String url, String method, SuccessCallback onSuccess, RefreshTokenCallback onRefreshToken, Function onError,
-      {bool sign, Map<String, dynamic> params}) async {
+      {bool sign, Map<String, dynamic> params, RequestStartCallback onStart, RequestFinishCallback onFinish}) async {
     Response response;
+    onStart?.call();
     if (method == 'GET'){
       if(params != null && params.isNotEmpty){
         StringBuffer buffer = StringBuffer('?');
@@ -79,6 +82,7 @@ class HttpUtil<T> {
         response = await _dio.post(url,data: params);
       }
     }
+    onFinish?.call();
     int statusCode = response.statusCode;
     String encodeResponse = json.encode(response.data);
     Map<String,dynamic> decodeMap = json.decode(encodeResponse);

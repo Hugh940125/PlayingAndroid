@@ -6,6 +6,8 @@ part 'home_article.g.dart';
 class HomeArticle{
   int curPage;
   List<HomeArticleInfo> datas;
+  int pageCount;
+  int total;
 
   HomeArticle(this.curPage, this.datas);
 

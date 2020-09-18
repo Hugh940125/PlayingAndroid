@@ -5,7 +5,7 @@ class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget{
 
   final Widget Function(BuildContext context, T value, Widget child) builder;
   final T model;
-  //final Widget child;
+  final Widget child;
   final Function(T) onReady;
 
   @override
@@ -13,7 +13,7 @@ class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget{
 
   ProviderWidget({
     this.model,
-    //this.child,
+    this.child,
     this.onReady,
     this.builder,
   });
@@ -27,7 +27,7 @@ class ProviderWidgetState<T extends ChangeNotifier> extends State<ProviderWidget
       create: (_) => widget.model,
       child: Consumer<T>(
         builder: widget.builder,
-        //child: widget.child,
+        child: widget.child,
       ),
     );
   }
@@ -38,5 +38,11 @@ class ProviderWidgetState<T extends ChangeNotifier> extends State<ProviderWidget
     if(widget.onReady != null){
       widget.onReady(widget.model);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print(T.toString()+"销毁了");
   }
 }

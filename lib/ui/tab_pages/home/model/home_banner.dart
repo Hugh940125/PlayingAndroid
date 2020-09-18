@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:playing/model/banner_info.dart';
+import 'package:playing/ui/tab_pages/home/model/banner_info.dart';
 
 part 'home_banner.g.dart';
 

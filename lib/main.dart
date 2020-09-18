@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playing/ui/splash/splash_page.dart';
 
+import 'common/routes/app_routes.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -11,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashPage(),
+      routes: AppRouter.routes,
     );
   }
 }

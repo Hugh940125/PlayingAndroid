@@ -14,7 +14,7 @@ class MePageState extends State<MePage>{
   Widget build(BuildContext context) {
     return CupertinoApp(
       home: Scaffold(
-        appBar: CommonAppBar("我的").build(context),
+        appBar: CommonAppBar("我的","me").build(context),
       ),
     );
   }

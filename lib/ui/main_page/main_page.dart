@@ -18,8 +18,7 @@ class MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           controller: _tabController,
@@ -30,7 +29,7 @@ class MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
             MePage()
           ],
         ),
-        bottomNavigationBar: Material(
+        bottomNavigationBar: Container(
           color: Colors.white,
             child:TabBar(
                 isScrollable:false,
@@ -116,8 +115,7 @@ class MainPageState extends State<MainPage> with SingleTickerProviderStateMixin{
                   )
                 ])
         ),
-      ),
-    );
+      );
   }
 
   @override
